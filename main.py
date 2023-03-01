@@ -1,4 +1,3 @@
-s = []
 
 
 def product(*args: tuple, repeat=1):
@@ -17,6 +16,12 @@ def product(*args: tuple, repeat=1):
 
 
 def cal_score(motif: list[int], DNA: list[str], k_mers: int):
+    """
+    :param motif: Possible Motif
+    :param DNA: String of DNA
+    :param k_mers: K-string to find on DNA
+    :return: Calculate of Score
+    """
     consensus = ''
     score = 0
     aline_mat = [DNA[j][i:i + k_mers] for j, i in zip(range(len(DNA)), motif)]
@@ -38,7 +43,14 @@ def cal_score(motif: list[int], DNA: list[str], k_mers: int):
 
 
 def BruteForceMotifSearch(DNA: list[str], t_row: int, n_col: int, k_motif: int):
-    global best_consensus
+    """
+    :param DNA: Strings for DNA
+    :param t_row: no.of row of DNA
+    :param n_col: length of DNA
+    :param k_motif: k-string to find
+    :return: best consensus string of DNA
+    """
+    best_consensus = None
     best_score = 0
     best_motif = None
     prob_s = product(range(n_col - k_motif + 1), repeat=t_row)
@@ -57,7 +69,7 @@ def main():
     DNA = ['GTACAG', 'TGACCG', 'AAAACG', 'CTAGCG']
     t = len(DNA)
     n = len(DNA[0])
-    k = 2
+    k = 4
     best_motif, best_score, consensus = BruteForceMotifSearch(DNA, t, n, k)
 
     print(f"{'#' * 40}")
